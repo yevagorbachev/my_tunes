@@ -2,6 +2,8 @@
 #include<stdio.h>
 #include<string.h>
 #include "songlist.h"
+// #define MAX(a,b) (a > b ? a : b)
+// BASE FUNCTIONALITY
 
 struct song_node * insert_node_front(struct song_node * head, char * name, char * artist) {
     struct song_node * carrier = malloc(sizeof(struct song_node *));
@@ -26,7 +28,7 @@ void print_list(struct song_node * head) {
 }
 
 void print_node(struct song_node * target) {
-    printf("\tSong name: %s\n\tArtist name: %s\n", target->name, target->artist);
+    printf("\t%s by %s\n", target->name, target->artist);
 }
 
 struct song_node * free_node(struct song_node * target) {
@@ -65,5 +67,40 @@ struct song_node * remove_node_index(struct song_node * head, int i) {
     }
     prev->next = next->next;
     free_node(next);
+    return head;
+}
+
+// ADDITIONAL FUNCTIONALITY
+int songcmp(struct song_node * s1, struct song_node * s2) {
+    int cmp_artist = strcmp(s1->artist, s2->artist);
+    if (cmp_artist == 0) {
+        return strcmp(s1->name, s2->name);
+    } 
+    return cmp_artist;
+}
+
+struct song_node * insert_node_lexor(struct song_node * head, char * name, char * artist) {
+    struct song_node * next = head->next;
+    struct song_node * prev = head;
+    struct song_node * new_node = insert_node_front(NULL, name, artist);
+
+    if (strcmp(artist, head->artist) < 0) { // special case: beginning of list
+        new_node->next = head;
+        return new_node;
+    }
+
+    while (next != NULL) {
+        if (songcmp(new_node, next) < 0) {
+            new_node->next = next;
+            prev->next = new_node;
+            break;
+        } else {
+            prev = next;
+            next = next->next;
+        }
+    }
+
+    // special case: end of list
+    prev->next = new_node;
     return head;
 }
