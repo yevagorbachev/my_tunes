@@ -2,8 +2,9 @@ ifeq ($(DEBUG), true)
 	CC = gcc -g
 else
 	CC = gcc
+endif
 
-objects: main.o album.o songlist.o
+objects = main.o album.o songlist.o
 
 all: $(objects)
 	$(CC) -o my_tunes $(objects)
@@ -18,11 +19,10 @@ songlist.o: songlist.c songlist.h
 	$(CC) -c songlist.c
 
 leak: run
-	valgrind --leak-check=yes ./program
+	valgrind --leak-check=yes ./my_tunes
 
 run:
-	./program
+	./my_tunes
 
 clean:
 	rm *.o
-	rm *.gch
