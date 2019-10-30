@@ -84,7 +84,7 @@ struct song_node * insert_node_lexor(struct song_node * head, char * name, char 
     struct song_node * prev = head;
     struct song_node * new_node = insert_node_front(NULL, name, artist);
 
-    if (strcmp(artist, head->artist) < 0) { // special case: beginning of list
+    if (songcmp(new_node, head) < 0) { // special case: beginning of list
         new_node->next = head;
         return new_node;
     }
@@ -93,7 +93,7 @@ struct song_node * insert_node_lexor(struct song_node * head, char * name, char 
         if (songcmp(new_node, next) < 0) {
             new_node->next = next;
             prev->next = new_node;
-            break;
+            return head;
         } else {
             prev = next;
             next = next->next;
