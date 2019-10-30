@@ -28,12 +28,14 @@ void print_list(struct song_node * head) {
 }
 
 void print_node(struct song_node * target) {
-    printf("\t%s by %s\n", target->name, target->artist);
+    if (target != NULL) {
+        printf("\t%s by %s\n", target->name, target->artist);
+    } else {
+        printf("Empty song node\n");
+    }
 }
 
 struct song_node * free_node(struct song_node * target) {
-    printf("Removing song at %p:\n", target);
-    print_node(target);
     free(target->name);
     free(target->artist);
     free(target);
@@ -57,11 +59,7 @@ struct song_node * remove_node_index(struct song_node * head, int i) {
         free_node(head);
         return next;
     }
-    for (int h = 1; h < i; h++) {
-        if (next == NULL) {
-            printf("Out of bounds!\n");
-            return NULL;
-        }
+    while ((next != NULL) && (i-- > 1)) {
         prev = next;
         next = next->next;
     }
@@ -105,5 +103,17 @@ struct song_node * select_random(struct song_node * head) {
     for (; i > 0; i--) {
         head = head->next;
     }
+    return head;
+}
+
+struct song_node * search_song(struct song_node * head, char * name, char* artist) {
+    struct song_node * box = insert_node_front(NULL, name, artist);
+
+    while ((head != NULL) && (songcmp(box, head) != 0)) {
+        head = head->next;
+    }
+    // printf("Found song at %p:", head);
+    // print_node(head);
+    free_node(box);
     return head;
 }

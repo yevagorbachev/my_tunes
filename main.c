@@ -13,29 +13,23 @@ int main() {
     slist = insert_node_lexor(slist, "Combat Reconniassance", "Vladimir Vysotskiy");
     slist = insert_node_lexor(slist, "Alexandrov's Song", "Red Army Choir");
     slist = insert_node_lexor(slist, "Under Way!", "Erich-Weinert Ensemble");
-    // printf("Printing fully populated list:\n");
-    // print_list(slist);
-    print_node(select_random(slist));
-        
-    /*
-    printf("\n\n");
+    print_list(slist);
     
-    printf("Partially depopulating list...\n");
-    slist = remove_node_index(slist, 2);
-    printf("\nList status:\n");
-    print_list(slist);
-    slist = remove_node_index(slist, 3);
-    printf("\nList status:\n");
-    print_list(slist);
+    printf("\n\n");
+
+    slist = remove_node_index(slist, 4);
     slist = remove_node_index(slist, 0);
-    printf("\nPrinting partially depopulated list:\n");
+    slist = remove_node_index(slist, 1);
+
     print_list(slist);
+    
+    search_song(slist, "Army of the People", "Red Army Choir");
+
 
     printf("\n\n");
-    
+
     printf("Fully depopulating list...\n");
     slist = free_list(slist);
     printf("Printing empty list:\n");
     print_list(slist);
-    /**/
 }
