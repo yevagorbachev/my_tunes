@@ -117,3 +117,10 @@ struct song_node * search_song(struct song_node * head, char * name, char* artis
     free_node(box);
     return head;
 }
+
+struct song_node * search_artist(struct song_node * head, char* artist) {
+    while ((head != NULL) && (strcmp(head->artist, artist) != 0)) {
+        head = head->next;
+    }
+    return head;
+}
