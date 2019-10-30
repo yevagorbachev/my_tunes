@@ -5,17 +5,19 @@
 
 // BASE FUNCTIONALITY
 
-struct song_node * insert_node_front(struct song_node * head, char * name, char * artist) {
-    struct song_node * carrier = malloc(sizeof(struct song_node *));
-    carrier->next = head;
-    
-    carrier->name = calloc(strlen(name), sizeof(char));
-    strcpy(carrier->name, name);
-    carrier->artist = calloc(strlen(artist), sizeof(char));
-    strcpy(carrier->artist, artist);
-    
+struct song_node * init(char * name, char * artist) {
+    struct song_node * egg = malloc(sizeof(struct song_node *));
+    egg->next = NULL;
+    egg->name = malloc(strlen(name));
+    strcpy(egg->name, name);
+    egg->artist = malloc(strlen(artist));
+    strcpy(egg->artist, artist);
+}
 
-    return carrier;
+struct song_node * insert_node_front(struct song_node * head, char * name, char * artist) {
+    struct song_node * egg = init(name, artist);
+    egg->next = head;
+    return egg;
 }
 
 void print_list(struct song_node * head) {
@@ -80,7 +82,7 @@ int songcmp(struct song_node * s1, struct song_node * s2) {
 struct song_node * insert_node_lexor(struct song_node * head, char * name, char * artist) {
     struct song_node * next = head->next;
     struct song_node * prev = head;
-    struct song_node * new_node = insert_node_front(NULL, name, artist);
+    struct song_node * new_node = init(name, artist);
 
     if (songcmp(new_node, head) < 0) { // special case: beginning of list
         new_node->next = head;
@@ -107,13 +109,11 @@ struct song_node * select_random(struct song_node * head) {
 }
 
 struct song_node * search_song(struct song_node * head, char * name, char* artist) {
-    struct song_node * box = insert_node_front(NULL, name, artist);
+    struct song_node * box = init(name, artist);
 
     while ((head != NULL) && (songcmp(box, head) != 0)) {
         head = head->next;
     }
-    // printf("Found song at %p:", head);
-    // print_node(head);
     free_node(box);
     return head;
 }

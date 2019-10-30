@@ -3,5 +3,5 @@ struct library {
 };
 
 struct library * init();
-struct library * album_rm(struct library * );
-struct library * album_deeprm(struct library *);
+void album_rm(struct library * );
+void album_deeprm(struct library *);
