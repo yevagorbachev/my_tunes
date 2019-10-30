@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<string.h>
 #include "songlist.h"
-// #define MAX(a,b) (a > b ? a : b)
+
 // BASE FUNCTIONALITY
 
 struct song_node * insert_node_front(struct song_node * head, char * name, char * artist) {
@@ -88,7 +88,7 @@ struct song_node * insert_node_lexor(struct song_node * head, char * name, char 
         new_node->next = head;
         return new_node;
     }
-    
+
     while ((next != NULL) && (songcmp(new_node, next) >= 0)) {
         prev = next;
         next = next->next;
@@ -99,5 +99,11 @@ struct song_node * insert_node_lexor(struct song_node * head, char * name, char 
 }
 
 struct song_node * select_random(struct song_node * head) {
-
+    int c = 0;
+    for (struct song_node * count = head; count != NULL; count = count->next) {c++;}
+    int i = rand() % c;
+    for (; i > 0; i--) {
+        head = head->next;
+    }
+    return head;
 }

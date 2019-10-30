@@ -4,6 +4,8 @@ struct song_node {
     struct song_node * next;
 };
 
+int nsrand();
+
 // BASE FUNCTIONALITY
 struct song_node * insert_node_front(struct song_node *, char *, char *);
 void print_node(struct song_node *);
