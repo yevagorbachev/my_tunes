@@ -88,19 +88,16 @@ struct song_node * insert_node_lexor(struct song_node * head, char * name, char 
         new_node->next = head;
         return new_node;
     }
-
-    while (next != NULL) {
-        if (songcmp(new_node, next) < 0) {
-            new_node->next = next;
-            prev->next = new_node;
-            return head;
-        } else {
-            prev = next;
-            next = next->next;
-        }
+    
+    while ((next != NULL) && (songcmp(new_node, next) >= 0)) {
+        prev = next;
+        next = next->next;
     }
-
-    // special case: end of list
+    new_node->next = next;
     prev->next = new_node;
     return head;
+}
+
+struct song_node * select_random(struct song_node * head) {
+
 }
