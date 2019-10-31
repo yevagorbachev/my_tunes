@@ -4,16 +4,16 @@ else
 	CC = gcc
 endif
 
-objects = main.o album.o songlist.o
+objects = main.o library.o songlist.o
 
 all: $(objects)
 	$(CC) -o my_tunes $(objects)
 
-main.o: main.c album.c songlist.c album.h songlist.h
+main.o: main.c library.c songlist.c library.h songlist.h
 	$(CC) -c main.c
 
-album.o: album.c songlist.c album.h songlist.h
-	$(CC) -c album.c
+library.o: library.c songlist.c library.h songlist.h
+	$(CC) -c library.c
 
 songlist.o: songlist.c songlist.h
 	$(CC) -c songlist.c
