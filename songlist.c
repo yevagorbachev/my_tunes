@@ -13,10 +13,10 @@ struct song_node * insert_node_front(struct song_node * head, char * name, char 
     strcpy(carrier->name, name);
     carrier->artist = calloc(strlen(artist), sizeof(char));
     strcpy(carrier->artist, artist);
-    
 
     return carrier;
 }
+
 
 void print_list(struct song_node * head) {
     int s = 1;
@@ -35,6 +35,16 @@ void print_node(struct song_node * target) {
     }
 }
 
+
+int songcmp(struct song_node * s1, struct song_node * s2) {
+    int cmp_artist = strcmp(s1->artist, s2->artist);
+    if (cmp_artist == 0) {
+        return strcmp(s1->name, s2->name);
+    } 
+    return cmp_artist;
+}
+
+
 struct song_node * free_node(struct song_node * target) {
     free(target->name);
     free(target->artist);
@@ -52,30 +62,29 @@ struct song_node * free_list(struct song_node * head) {
     return NULL;
 }
 
-struct song_node * remove_node_index(struct song_node * head, int i) {
+struct song_node * list_remove_song(struct song_node * head, char * name, char * artist) {
+    struct song_node * box = insert_node_front(NULL, name, artist);
     struct song_node * next = head->next;
     struct song_node * prev = head;
-    if (i == 0) {
+
+    if (songcmp(box, head) == 0) {
         free_node(head);
         return next;
     }
-    while ((next != NULL) && (i-- > 1)) {
+
+    while (songcmp(box, next) != 0) {
         prev = next;
         next = next->next;
+        if (next == NULL) {
+            return head;
+        }
     }
+
     prev->next = next->next;
     free_node(next);
     return head;
 }
 
-// ADDITIONAL FUNCTIONALITY
-int songcmp(struct song_node * s1, struct song_node * s2) {
-    int cmp_artist = strcmp(s1->artist, s2->artist);
-    if (cmp_artist == 0) {
-        return strcmp(s1->name, s2->name);
-    } 
-    return cmp_artist;
-}
 
 struct song_node * insert_node_lexor(struct song_node * head, char * name, char * artist) {
     struct song_node * next = head->next;
@@ -96,7 +105,7 @@ struct song_node * insert_node_lexor(struct song_node * head, char * name, char 
     return head;
 }
 
-struct song_node * select_random(struct song_node * head) {
+struct song_node * list_select_random(struct song_node * head) {
     int c = 0;
     for (struct song_node * count = head; count != NULL; count = count->next) {c++;}
     int i = rand() % c;
@@ -106,19 +115,17 @@ struct song_node * select_random(struct song_node * head) {
     return head;
 }
 
-struct song_node * search_song(struct song_node * head, char * name, char* artist) {
+struct song_node * list_search_song(struct song_node * head, char * name, char* artist) {
     struct song_node * box = insert_node_front(NULL, name, artist);
 
     while ((head != NULL) && (songcmp(box, head) != 0)) {
         head = head->next;
     }
-    // printf("Found song at %p:", head);
-    // print_node(head);
     free_node(box);
     return head;
 }
 
-struct song_node * search_artist(struct song_node * head, char* artist) {
+struct song_node * list_search_artist(struct song_node * head, char* artist) {
     while ((head != NULL) && (strcmp(head->artist, artist) != 0)) {
         head = head->next;
     }
