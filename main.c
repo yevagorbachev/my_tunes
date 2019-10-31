@@ -3,7 +3,7 @@
 #include<string.h>
 #include<time.h>
 #include "songlist.h"
-#include "album.h"
+#include "library.h"
 
 int main() {
     srand(time(NULL));
