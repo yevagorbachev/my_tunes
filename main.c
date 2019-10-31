@@ -14,9 +14,6 @@ int main() {
     slist = insert_node_lexor(slist, "Alexandrov's Song", "The Red Army Choir");
     slist = insert_node_lexor(slist, "Under Way!", "The Erich-Weinert Ensemble");
     
-    slist = list_remove_song(slist, "Under Way!", "The Erich-Weinert Ensemble");
-    printf("First song by The Erich-Weinert Ensemble:\n");
-    print_node(list_search_artist(slist, "The Erich-Weinert Ensemble"));
-
+    list_print_artist(slist, "The Red Army Choir");
     slist = free_list(slist);
 }

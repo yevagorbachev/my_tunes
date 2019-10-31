@@ -30,8 +30,17 @@ void print_list(struct song_node * head) {
 void print_node(struct song_node * target) {
     if (target != NULL) {
         printf("\t%s by %s\n", target->name, target->artist);
-    } else {
-        printf("Empty song node\n");
+    }
+}
+
+void list_print_artist(struct song_node * head, char * artist) {
+    if (head != NULL) {
+        printf("Songs by %s:\n", artist);
+        for (struct song_node * next_by_artist = list_search_artist(head, artist); 
+            next_by_artist != NULL; 
+            next_by_artist = list_search_artist(head = next_by_artist->next, artist)) {
+            print_node(next_by_artist);
+        }
     }
 }
 
