@@ -4,7 +4,7 @@
 #include "album.h"
 
 
-struct library * init() {
+struct library * lib_init() {
     struct library * lib = calloc(sizeof(struct library), 1);
     return lib;
 }
