@@ -13,6 +13,7 @@ int main() {
     slist = insert_node_lexor(slist, "Combat Reconniassance", "Vladimir Vysotskiy");
     slist = insert_node_lexor(slist, "Alexandrov's Song", "Red Army Choir");
     slist = insert_node_lexor(slist, "Under Way!", "Erich-Weinert Ensemble");
+    print_list(slist);
     print_node(search_artist(slist, "Red Army Choir"));
 
     slist = free_list(slist);
