@@ -99,7 +99,6 @@ struct song_node * insert_node_lexor(struct song_node * head, char * name, char 
     if (head == NULL) {
         return insert_node_front(NULL, name, artist);
     }
-    
     struct song_node * next = head->next;
     struct song_node * prev = head;
     struct song_node * new_node = insert_node_front(NULL, name, artist);

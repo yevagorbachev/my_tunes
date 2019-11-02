@@ -20,9 +20,9 @@ int main() {
 
     printf("Populating library...\n");
     for(int i = 0; i < 6; i++) {
-        printf("Inserting \"%s\" by %s\n", LIST[i][0], LIST[i][1]);
         lib_insert_song(lib, LIST[i][0], LIST[i][1]);
     }
     printf("Printing full library:\n");
     print_library(lib);
+    /**/
 }

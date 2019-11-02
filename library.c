@@ -10,7 +10,7 @@ struct library * init(){
 
 void print_library(struct library * lib) {
     for (int i = 0; i < 27; i++) {
-        print_list(lib->table[i]);
+        print_list((lib->table)[i]);
     }
 }
 
@@ -44,8 +44,8 @@ struct library * free_lib(struct library * lib){
 }
 
 void lib_remove_song(struct library * lib, char * name, char * artist){
-    if ('A' <= name[0] <= 'Z') {
-        list_remove_song(lib->table[name[0] - 'A'], name, artist);
+    if ('A' <= artist[0] <= 'Z') {
+        list_remove_song(lib->table[artist[0] - 'A'], name, artist);
     } else {
         list_remove_song(lib->table[27], name, artist);
     }
@@ -53,10 +53,13 @@ void lib_remove_song(struct library * lib, char * name, char * artist){
 
 
 void lib_insert_song(struct library * lib, char * name, char * artist){
-    if ('A' <= name[0] <= 'Z') {
-        insert_node_lexor((lib->table)[name[0] - 'A'], name, artist);
+    if ('A' <= artist[0] <= 'Z') {
+        struct song_node ** loc = &(lib->table)[artist[0] - 'A'];
+        printf("inserting \"%s\" by %s under letter %c\n", name, artist, artist[0]);
+        *loc = insert_node_lexor(*loc, name, artist);
     } else {
-        insert_node_lexor(lib->table[27], name, artist);
+        struct song_node ** loc = &lib->table[27];
+        *loc = insert_node_lexor(*loc, name, artist);
     }
 }
 
