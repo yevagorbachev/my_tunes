@@ -32,5 +32,10 @@ int main() {
     }
     printf("Printing full library:\n");
     print_library(lib);
+    printf("Freeing library...\n");
+    lib = free_library(lib);
+    printf("Printing empty library:\n");
+    print_library(lib);
+    printf("%d\n", ('A' <= '.') && ('.' <= 'Z'));
     /**/
 }
