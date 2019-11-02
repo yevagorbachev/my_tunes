@@ -4,13 +4,21 @@
 #include<time.h>
 #include "library.h"
 
-char * LIST[6][2] = {
-    {"Farewell of Slavianka","The Red Army Choir"},
-    {"Under Way!","The Erich-Weinert Ensemble"},
-    {"On the Road","The Red Army Choir"},
-    {"Combat Reconnissaince","Vladimir Vysotskiy"},
-    {"Aleksandrov's Song","The Red Army Choir"},
-    {"Partisan's Song","The Red Army Choir"},
+char * LIST[14][2] = {
+    {"418","HTTP"},
+    {"India","\'"},
+    {"Mike","Alpha"},
+    {"Tango","Echo"},
+    {"Alpha","Papa"},
+    {"!"," "},
+    {"718","HTTP"},
+    {"India","Alpha"},
+    {"Mike","November"},
+    {"Oscar","Tango"},
+    {"Alpha","Tango"},
+    {"Echo","Alpha"},
+    {"Papa","Oscar"},
+    {"Tango","."},
 };
 
 int main() {
@@ -19,7 +27,7 @@ int main() {
     print_library(lib);
 
     printf("Populating library...\n");
-    for(int i = 0; i < 6; i++) {
+    for(int i = 0; i < 14; i++) {
         lib_insert_song(lib, LIST[i][0], LIST[i][1]);
     }
     printf("Printing full library:\n");

@@ -19,9 +19,7 @@ struct song_node * insert_node_front(struct song_node * head, char * name, char 
 
 
 void print_list(struct song_node * head) {
-    int s = 1;
     while (head != NULL) {
-        printf("Song #%d:\n", s++);
         print_node(head);
         head = head->next;
     }
@@ -35,7 +33,6 @@ void print_node(struct song_node * target) {
 
 void list_print_artist(struct song_node * head, char * artist) {
     if (head != NULL) {
-        printf("Songs by %s:\n", artist);
         for (struct song_node * next_by_artist = list_search_artist(head, artist); 
             next_by_artist != NULL; 
             next_by_artist = list_search_artist(head = next_by_artist->next, artist)) {
