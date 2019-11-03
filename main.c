@@ -23,19 +23,11 @@ char * LIST[14][2] = {
 
 int main() {
     srand(time(NULL));
-
-
-
     struct library * lib = init();
     for(int i = 0; i < 14; i++) {
         lib_insert_song(lib, LIST[i][0], LIST[i][1]);
     }
-    printf("Printing 10 random songs:\n");
     lib_print_Nrandom(lib, 10);
-
-
-
-
     printf("Freeing library...\n");
     lib = free_library(lib);
     /**/

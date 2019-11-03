@@ -36,14 +36,13 @@ void lib_print_Nrandom(struct library * lib, int n){
         i = rand() % 27;
         struct song_node * rlist = lib->table[i];
         if (rlist != NULL) {
-            print_list(rlist);
+            print_node(list_select_random(rlist));
             n--;
         }
     }
-    for (; n > 0; n--) {
-
-        print_node(list_select_random(lib->table[rand() % 27]));
-    }
+    // for (; n > 0; n--) {
+    //     print_node(list_select_random(lib->table[rand() % 27]));
+    // }
 }
 
 
@@ -57,9 +56,11 @@ struct library * free_library(struct library * lib){
 
 void lib_remove_song(struct library * lib, char * name, char * artist){
     if (('A' <= artist[0]) && (artist[0] <= 'Z')) {
-        list_remove_song(lib->table[artist[0] - 'A'], name, artist);
+        struct song_node ** loc = &lib->table[artist[0] - 'A'];
+        *loc = list_remove_song(*loc, name, artist);
     } else {
-        list_remove_song(lib->table[26], name, artist);
+        struct song_node ** loc = &lib->table[26];
+        *loc = list_remove_song(*loc, name, artist);
     }
 }
 
