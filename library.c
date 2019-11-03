@@ -31,18 +31,14 @@ void lib_print_letter(struct library * lib, char letter){
 }
 
 void lib_print_Nrandom(struct library * lib, int n){
-    int i;
+    struct song_node * rlist;
     while (n > 0) {
-        i = rand() % 27;
-        struct song_node * rlist = lib->table[i];
+        rlist = lib->table[rand() % 27];
         if (rlist != NULL) {
             print_node(list_select_random(rlist));
             n--;
         }
     }
-    // for (; n > 0; n--) {
-    //     print_node(list_select_random(lib->table[rand() % 27]));
-    // }
 }
 
 
@@ -68,7 +64,6 @@ void lib_remove_song(struct library * lib, char * name, char * artist){
 void lib_insert_song(struct library * lib, char * name, char * artist){
     if (('A' <= artist[0]) && (artist[0] <= 'Z')) {
         struct song_node ** loc = &lib->table[artist[0] - 'A'];
-        printf("inserting \"%s\" by %s under letter %c\n", name, artist, artist[0]);
         *loc = insert_node_lexor(*loc, name, artist);
     } else {
         struct song_node ** loc = &lib->table[26];

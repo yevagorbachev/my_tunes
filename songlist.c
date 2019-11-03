@@ -82,10 +82,10 @@ struct song_node * list_remove_song(struct song_node * head, char * name, char *
         prev = next;
         next = next->next;
         if (next == NULL) {
+            free(box);
             return head;
         }
     }
-
     prev->next = next->next;
     free_node(next);
     return head;

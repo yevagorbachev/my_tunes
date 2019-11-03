@@ -27,7 +27,12 @@ int main() {
     for(int i = 0; i < 14; i++) {
         lib_insert_song(lib, LIST[i][0], LIST[i][1]);
     }
-    lib_print_Nrandom(lib, 10);
+    // int i = rand() % 14;
+    // printf("Removing \"%s\" by %s\n", LIST[i][0], LIST[i][1]);
+    // lib_remove_song(lib, LIST[i][0], LIST[i][1]);
+    // print_library(lib);
+    lib_remove_song(lib, " ", "NOPE");
+    print_library(lib);
     printf("Freeing library...\n");
     lib = free_library(lib);
     /**/
