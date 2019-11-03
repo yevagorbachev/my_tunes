@@ -31,7 +31,17 @@ void lib_print_letter(struct library * lib, char letter){
 }
 
 void lib_print_Nrandom(struct library * lib, int n){
+    int i;
+    while (n > 0) {
+        i = rand() % 27;
+        struct song_node * rlist = lib->table[i];
+        if (rlist != NULL) {
+            print_list(rlist);
+            n--;
+        }
+    }
     for (; n > 0; n--) {
+
         print_node(list_select_random(lib->table[rand() % 27]));
     }
 }
@@ -39,7 +49,6 @@ void lib_print_Nrandom(struct library * lib, int n){
 
 struct library * free_library(struct library * lib){
     for (int i = 0; i < 27; i++) {
-        printf("Freeing character %c...\n", i + 'A');
         free_list(lib->table[i]);
     }
     free(lib);

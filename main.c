@@ -22,20 +22,21 @@ char * LIST[14][2] = {
 };
 
 int main() {
-    struct library * lib = init();
-    printf("Printing empty library:\n");
-    print_library(lib);
+    srand(time(NULL));
 
-    printf("Populating library...\n");
+
+
+    struct library * lib = init();
     for(int i = 0; i < 14; i++) {
         lib_insert_song(lib, LIST[i][0], LIST[i][1]);
     }
-    printf("Printing full library:\n");
-    print_library(lib);
+    printf("Printing 10 random songs:\n");
+    lib_print_Nrandom(lib, 10);
+
+
+
+
     printf("Freeing library...\n");
     lib = free_library(lib);
-    printf("Printing empty library:\n");
-    print_library(lib);
-    printf("%d\n", ('A' <= '.') && ('.' <= 'Z'));
     /**/
 }
