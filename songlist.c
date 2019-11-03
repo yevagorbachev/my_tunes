@@ -76,6 +76,8 @@ struct song_node * list_remove_song(struct song_node * head, char * name, char *
     if (songcmp(box, head) == 0) {
         free_node(head);
         return next;
+    } else if (next == NULL) {
+        return head;
     }
 
     while (songcmp(box, next) != 0) {
