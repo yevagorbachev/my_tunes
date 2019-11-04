@@ -19,9 +19,7 @@ struct song_node * insert_node_front(struct song_node * head, char * name, char 
 
 
 void print_list(struct song_node * head) {
-    int s = 1;
     while (head != NULL) {
-        printf("Song #%d:\n", s++);
         print_node(head);
         head = head->next;
     }
@@ -29,13 +27,12 @@ void print_list(struct song_node * head) {
 
 void print_node(struct song_node * target) {
     if (target != NULL) {
-        printf("\t%s by %s\n", target->name, target->artist);
+        printf("\t\"%s\" by %s\n", target->name, target->artist);
     }
 }
 
 void list_print_artist(struct song_node * head, char * artist) {
     if (head != NULL) {
-        printf("Songs by %s:\n", artist);
         for (struct song_node * next_by_artist = list_search_artist(head, artist); 
             next_by_artist != NULL; 
             next_by_artist = list_search_artist(head = next_by_artist->next, artist)) {
@@ -72,6 +69,10 @@ struct song_node * free_list(struct song_node * head) {
 }
 
 struct song_node * list_remove_song(struct song_node * head, char * name, char * artist) {
+    if (head == NULL) {
+        return NULL;
+    }
+
     struct song_node * box = insert_node_front(NULL, name, artist);
     struct song_node * next = head->next;
     struct song_node * prev = head;
@@ -79,16 +80,18 @@ struct song_node * list_remove_song(struct song_node * head, char * name, char *
     if (songcmp(box, head) == 0) {
         free_node(head);
         return next;
+    } else if (next == NULL) {
+        return head;
     }
 
     while (songcmp(box, next) != 0) {
         prev = next;
         next = next->next;
         if (next == NULL) {
+            free(box);
             return head;
         }
     }
-
     prev->next = next->next;
     free_node(next);
     return head;
@@ -96,6 +99,9 @@ struct song_node * list_remove_song(struct song_node * head, char * name, char *
 
 
 struct song_node * insert_node_lexor(struct song_node * head, char * name, char * artist) {
+    if (head == NULL) {
+        return insert_node_front(NULL, name, artist);
+    }
     struct song_node * next = head->next;
     struct song_node * prev = head;
     struct song_node * new_node = insert_node_front(NULL, name, artist);
