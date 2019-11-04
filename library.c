@@ -23,8 +23,8 @@ void lib_print_artist(struct library * lib, char * artist){
 }
 
 void lib_print_letter(struct library * lib, char letter){
-    if (('A' <= letter) && (letter <= 'Z')) {
-        print_list(lib->table[letter - 'A']);
+    if (('a' <= letter) && (letter <= 'z')) {
+        print_list(lib->table[letter - 'a']);
     } else {
         print_list(lib->table[26]);
     }
@@ -51,8 +51,8 @@ struct library * free_library(struct library * lib){
 }
 
 void lib_remove_song(struct library * lib, char * name, char * artist){
-    if (('A' <= artist[0]) && (artist[0] <= 'Z')) {
-        struct song_node ** loc = &lib->table[artist[0] - 'A'];
+    if (('a' <= artist[0]) && (artist[0] <= 'z')) {
+        struct song_node ** loc = &lib->table[artist[0] - 'a'];
         *loc = list_remove_song(*loc, name, artist);
     } else {
         struct song_node ** loc = &lib->table[26];
@@ -62,8 +62,18 @@ void lib_remove_song(struct library * lib, char * name, char * artist){
 
 
 void lib_insert_song(struct library * lib, char * name, char * artist){
-    if (('A' <= artist[0]) && (artist[0] <= 'Z')) {
-        struct song_node ** loc = &lib->table[artist[0] - 'A'];
+    if (('a' <= artist[0]) && (artist[0] <= 'z')) {
+        struct song_node ** loc = &lib->table[artist[0] - 'a'];
+        *loc = insert_node_lexor(*loc, name, artist);
+    } else {
+        struct song_node ** loc = &lib->table[26];
+        *loc = insert_node_lexor(*loc, name, artist);
+    }
+}
+
+struct song_node * lib_search_song(struct library * lib, char * name, char * artist){
+    if (('a' <= artist[0]) && (artist[0] <= 'z')) {
+        struct song_node ** loc = &lib->table[artist[0] - 'a'];
         *loc = insert_node_lexor(*loc, name, artist);
     } else {
         struct song_node ** loc = &lib->table[26];
@@ -72,10 +82,6 @@ void lib_insert_song(struct library * lib, char * name, char * artist){
 }
 
 /*
-struct song_node * lib_search_song(struct library * lib, char * name, char * artist){
-
-}
-
 struct song_node * lib_search_artist(struct library * lib, char * artist){
 
 }

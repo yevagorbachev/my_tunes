@@ -27,7 +27,7 @@ void print_list(struct song_node * head) {
 
 void print_node(struct song_node * target) {
     if (target != NULL) {
-        printf("\t%s by %s\n", target->name, target->artist);
+        printf("\t\"%s\" by %s\n", target->name, target->artist);
     }
 }
 

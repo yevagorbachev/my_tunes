@@ -5,20 +5,20 @@
 #include "library.h"
 
 char * LIST[14][2] = {
-    {"418","HTTP"},
-    {"India","\'"},
-    {"Mike","Alpha"},
-    {"Tango","Echo"},
-    {"Alpha","Papa"},
+    {"418","http"},
+    {"india","\'"},
+    {"mike","alpha"},
+    {"tango","echo"},
+    {"alpha","papa"},
     {"!"," "},
-    {"718","HTTP"},
-    {"India","Alpha"},
-    {"Mike","November"},
-    {"Oscar","Tango"},
-    {"Alpha","Tango"},
-    {"Echo","Alpha"},
-    {"Papa","Oscar"},
-    {"Tango","."},
+    {"718","http"},
+    {"india","alpha"},
+    {"mike","november"},
+    {"oscar","tango"},
+    {"alpha","tango"},
+    {"echo","alpha"},
+    {"papa","oscar"},
+    {"tango","."},
 };
 
 int main() {
