@@ -73,16 +73,22 @@ void lib_insert_song(struct library * lib, char * name, char * artist){
 
 struct song_node * lib_search_song(struct library * lib, char * name, char * artist){
     if (('a' <= artist[0]) && (artist[0] <= 'z')) {
-        struct song_node ** loc = &lib->table[artist[0] - 'a'];
-        *loc = insert_node_lexor(*loc, name, artist);
+        struct song_node * loc = lib->table[artist[0] - 'a'];
+        return list_search_song(loc, name, artist);
     } else {
-        struct song_node ** loc = &lib->table[26];
-        *loc = insert_node_lexor(*loc, name, artist);
+        struct song_node * loc = lib->table[26];
+        return list_search_song(loc, name, artist);
     }
 }
 
-/*
-struct song_node * lib_search_artist(struct library * lib, char * artist){
 
+struct song_node * lib_search_artist(struct library * lib, char * artist){
+    if (('a' <= artist[0]) && (artist[0] <= 'z')) {
+        struct song_node * loc = lib->table[artist[0] - 'a'];
+        return list_search_artist(loc, artist);
+    } else {
+        struct song_node * loc = lib->table[26];
+        return list_search_artist(loc, artist);
+    }
 }
 /**/

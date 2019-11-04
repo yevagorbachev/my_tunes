@@ -69,6 +69,10 @@ struct song_node * free_list(struct song_node * head) {
 }
 
 struct song_node * list_remove_song(struct song_node * head, char * name, char * artist) {
+    if (head == NULL) {
+        return NULL;
+    }
+
     struct song_node * box = insert_node_front(NULL, name, artist);
     struct song_node * next = head->next;
     struct song_node * prev = head;
